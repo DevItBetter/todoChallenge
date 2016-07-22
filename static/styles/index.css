@@ -238,6 +238,37 @@ label[for='toggle-all'] {
 	display: block;
 }
 
+#todo-list li .clone {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 100px;
+	bottom: 0;
+	width: 40px;
+	height: 40px;
+	margin: auto 0;
+	font-size: 25px;
+	color: #777;
+	margin-bottom: 11px;
+
+	transition: color 0.2s ease-out;
+}
+
+#todo-list li .clone:hover {
+	color: #555;
+	border-color: #555;
+	border-width: 1px;
+}
+
+#todo-list li .clone:after {
+	content: 'clone';
+}
+
+#todo-list li:hover .clone {
+	display: block;
+}
+
+
 #todo-list li .edit {
 	display: none;
 }
