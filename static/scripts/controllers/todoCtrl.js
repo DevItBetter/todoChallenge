@@ -96,6 +96,27 @@ angular.module('todomvc')
 			store.delete(todo);
 		};
 
+		$scope.cloneTodo = function (todo) {
+			var newTodo = {
+				task: todo.task,
+				done: todo.done,
+				date: todo.date
+			};
+
+			if (!(newTodo.task || newTodo.done || newTodo.date)) {
+				return;
+			}
+
+			$scope.saving = true;
+			store.insert(newTodo)
+				.then(function success() {
+					$scope.newTodo = '';
+				})
+				.finally(function () {
+					$scope.saving = false;
+				});
+		};
+
 		$scope.saveTodo = function (todo) {
 			store.put(todo);
 		};
