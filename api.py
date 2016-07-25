@@ -65,5 +65,16 @@ class TodoResource(Resource):
             return '', 204
         return {'error': 'The specified id was not found in the DB'}, 400
 
+    def clone(self, todo_id):
+        to_clone = Todo.query.get(todo_id)
+        if to_clone:
+            new = Todo(to_clone.task, to_clone.done)
+            new.date = to_clone.date
+            db.session.add(new)
+            db.session.commit()
+            return new, 201
+        return {'error': 'The specified id was not found in the DB'}, 400
+
+
 api.add_resource(TodoListResource, '/todos')
 api.add_resource(TodoResource, '/todos/<string:todo_id>')

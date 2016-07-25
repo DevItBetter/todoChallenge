@@ -81,6 +81,17 @@ angular.module('todomvc')
 			put: function (todo) {
 				return store.api.update({ id: todo.id }, todo)
 					.$promise;
+			},
+
+			clone: function (todo) {
+				var originalTodos = store.todos.slice(0);
+				return store.api.clone({id: todo.id}, //WRONG
+					function success(resp) {
+
+					}, function error() {
+
+						angular.copy(originalTodos, store.todos);
+					});
 			}
 		};
 
